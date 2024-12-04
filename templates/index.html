@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Layout Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 20px auto;
+        }
+  /* Hero Section */
+  .hero {
+            background-image: url('/static/img.jpg'); 
+            background-size: cover;
+            background-position: center;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay for better text visibility */
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .search-container select,
+        .search-container input {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #f28c38;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #e37a25;
+        }
+        .section {
+            padding: 40px 20px;
+            border-radius: 8px;
+     
+            position: relative;
+        }
+        /* Section styles */
+        .new-arrival {
+            background-color: #a2c8f1; /* Light Blue */
+        }
+
+        .trending-projects {
+            background-color: #d1e8a4; /* Light Yellow */
+        }
+
+        .filter {
+            background-color: #8ed39d; /* Light Green */
+        }
+
+        .center-display {
+            background-color: #f4d1a1; /* Light Orange */
+        }
+
+        .filter-by-matters {
+            background-color: #c6efb3; /* Light Green */
+        }
+
+        .current-exclusives {
+            background-color: #a7f3d0; /* Light Teal */
+        }
+
+        .loan-assistance {
+            background-color: #e9c6f7; /* Light Pink */
+        }
+
+        .dream-home {
+            background-color: #f0b8e4; /* Light Pink */
+        }
+
+        .why-choose-wyndo {
+            background-color: #c6efb3; /* Light Green */
+        }
+
+        .join-us {
+            background-color: #b6a1f4; /* Light Purple */
+        }
+        /* Titles */
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Card container */
+        .cards {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .left-cards,
+        .right-cards {
+            display: flex;
+            gap: 150px;
+        }
+
+        .center-cards {
+            display: flex;
+            gap: 150px;
+            justify-content: center;
+        }
+
+        /* Card styles */
+        .card {
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* View All button */
+        .view-all-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .view-all {
+            font-size: 18px;
+            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .view-all:hover {
+            color: #0077cc;
+        }
+
+        /* Filter button styles */
+        .filter-button {
+            padding: 15px 30px;
+            background-color: #f28c38;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .filter-button:hover {
+            background-color: #e37a25;
+        }
+
+        /* Filter by What Matters section styles */
+        .filter-section-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .filter-section-title span {
+            font-weight: bold;
+        }
+
+        .filter-box-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .filter-box {
+            background-color: #f28c38;
+            color: white;
+            width: 200px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        .filter-box-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .filter-box-description {
+            font-size: 14px;
+        }
+
+        .filter-by-city-section {
+            background-color: #b6a1f4; /* Light Purple */
+            padding: 40px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .filter-by-city-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .city-buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .city-button {
+            background-color: #ffffff;
+            color: #333;
+            border: 2px solid #333;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .city-button:hover {
+            background-color: #333;
+            color: #ffffff;
+        }
+
+        /* Current Exclusives Section */
+        .exclusive-buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .exclusive-button {
+            background-color: #34d399;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            border: none;
+        }
+
+        .exclusive-button:hover {
+            background-color: #059669;
+        }
+
+        /* Loan Assistance Section */
+        .loan-details {
+            padding: 20px;
+            font-size: 18px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .loan-details strong {
+            font-weight: bold;
+        }
+
+        .loan-list {
+            margin: 20px auto;
+            padding: 0 20px;
+            max-width: 800px;
+            font-size: 18px;
+        }
+
+        .loan-list li {
+            margin-bottom: 10px;
+        }
+  
+
+
+
+        /* Button container */
+        .faq-buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .faq-button {
+            background-color: #ffffff;
+            color: #333;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 18px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+            width: 300px;
+        }
+
+        .faq-button:hover {
+            background-color: #f4f4f4;
+            transform: translateY(-5px);
+        }
+
+        /* Emphasized number section */
+        .highlight-section {
+            text-align: center;
+            font-size: 20px;
+            margin: 40px 0;
+        }
+
+        .highlight-section strong {
+            font-weight: bold;
+        }
+
+        .highlight-text {
+            background-color: #f28c38;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            font-size: 24px;
+            margin: 20px auto;
+            display: inline-block;
+        }
+
+        /* Why Choose Wyndo Section */
+        .why-choose-wyndo {
+            padding: 20px;
+            font-size: 18px;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .why-choose-wyndo ul {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+            text-align: left;
+        }
+
+        .why-choose-wyndo ul li {
+            margin-bottom: 15px;
+        }
+
+        /* Ready to Join Section */
+        .join-us {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .join-us-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .get-started {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0077cc;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+     <!-- Hero Section -->
+     <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+          <h1>Your <strong>happily ever after</strong> begins at <strong>home</strong>.</h1>
+          <p>Come find your <strong>happiest place</strong> with us!</p>
+          <p>Residential | Commercial</p>
+          <div class="search-container">
+              <select name="city" id="city">
+                  <option value="">Select City</option>
+                  <option value="bangalore">Bangalore</option>
+                  <option value="pune">Pune</option>
+                  <option value="delhi">Delhi</option>
+                  <option value="mumbai">Mumbai</option>
+                  <option value="hyderabad">Hyderabad</option>
+                  <option value="chennai">Chennai</option>
+              </select>
+              <input type="text" placeholder="Search">
+              <button class="search-button">Search</button>
+          </div>
+      </div>
+  </section>
+
+
+        <!-- New Arrival Section -->
+        <section class="section new-arrival">
+            <h2>New Arrival:</h2>
+            <div class="cards">
+                <!-- Left two cards -->
+                <div class="left-cards">
+                    <div class="card"></div>
+                    <div class="card"></div>
+                </div>
+                <!-- Center gap -->
+                <div class="center-gap" style="width: 100px;"></div>
+                <!-- Right two cards -->
+                <div class="right-cards">
+                    <div class="card"></div>
+                    <div class="card"></div>
+                </div>
+            </div>
+            <div class="view-all-container">
+                <a href="#" class="view-all">&lt;- view all -&gt;</a>
+            </div>
+        </section>
+
+        <!-- Center Display Section -->
+        <section class="section center-display">
+            <h2>Center Display:</h2>
+            <div class="cards center-cards">
+                <!-- Center three cards -->
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+            </div>
+            <div class="view-all-container">
+                <a href="#" class="view-all">&lt;- view all -&gt;</a>
+            </div>
+        </section>
+
+        <!-- Filter by What Matters Section -->
+        <section class="section filter-by-matters">
+            <h2 class="filter-section-title">Filter by <span>What Matters</span>:</h2>
+            <div class="filter-box-container">
+                <div class="filter-box">
+                    <div class="filter-box-title">Quiet Spaces</div>
+                    <div class="filter-box-description">Low-noise neighborhood for calm living.</div>
+                </div>
+                <div class="filter-box">
+                    <div class="filter-box-title">Clean Air Localities</div>
+                    <div class="filter-box-description">Escape the city smog and enjoy suburban living.</div>
+                </div>
+                <div class="filter-box">
+                    <div class="filter-box-title">Gourmet Neighborhoods</div>
+                    <div class="filter-box-description">Food lovers, your home is here.</div>
+                </div>
+                </div>
+                <div class="filter-box-container">
+                <div class="filter-box">
+                    <div class="filter-box-title">Metro-Connected Homes</div>
+                    <div class="filter-box-description">Convenient living, just steps away from the metro.</div>
+                </div>
+                <div class="filter-box">
+                    <div class="filter-box-title">Rental Income Properties</div>
+                    <div class="filter-box-description">Own it, we'll handle the rent. You just sit back and enjoy.</div>
+                </div>
+                <div class="filter-box">
+                    <div class="filter-box-title">EV-Friendly Areas</div>
+                    <div class="filter-box-description">Neighborhoods with electric vehicle charging stations.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter by City Section -->
+        <section class="filter-by-city-section">
+            <h2 class="filter-by-city-title">Let's find <strong>you</strong> a home in the <strong>city</strong> you love <strong>most</strong>!</h2>
+            <div class="city-buttons-container">
+                <button class="city-button">Bangalore</button>
+                <button class="city-button">Pune</button>
+                <button class="city-button">Delhi</button>
+                </div>
+                <br/><br/>
+                <div class="city-buttons-container">
+                <button class="city-button">Mumbai</button>
+                <button class="city-button">Hyderabad</button>
+                <button class="city-button">Chennai (Coming soon!)</button>
+            </div>
+        </section>
+
+        <!-- Browse Our Current Exclusives Section -->
+        <section class="section current-exclusives">
+            <h2>Browse <strong>Our Current Exclusives</strong>:</h2>
+            <div class="exclusive-buttons-container">
+                <button class="exclusive-button">Fresh off the market</button>
+                <button class="exclusive-button">Ready-to-move-in homes</button>
+                <button class="exclusive-button">Luxury Living</button>
+                <button class="exclusive-button">Pocket friendly properties</button>
+                <button class="exclusive-button">Bachelor pads</button>
+                <button class="exclusive-button">Gently used properties</button>
+            </div>
+        </section>
+
+        <!-- Loan Assistance Section -->
+        <section class="section loan-assistance">
+            <div class="loan-details">
+                Just like the <strong>good old days</strong> - but <strong>better</strong>! we'll handle the <strong>details</strong> so you can focus on your <strong>new beginning</strong>.
+                <br><br>
+                We've got <strong>you</strong> covered, every step of the way... from <strong>loans</strong> to <strong>moving vans</strong>.
+            </div>
+            <ul class="loan-list">
+                <li><strong>Loan Assistance</strong> - The best loans, handpicked for you.</li>
+                <li><strong>Packers & Movers</strong> - Fast, easy moving with our trusted network.</li>
+                <li><strong>Charging Ahead</strong> - We'll also set up your EV Station!</li>
+            </ul>
+            <div class="loan-details">
+                But Wait, there's more!<br><br>
+                Our <strong>Concierge Service</strong>: Your home, Our care.<br>
+                Relax and let us handle the <strong>day-to-day</strong> property management, from <strong>tenant screening</strong> to <strong>maintenance</strong>, while providing personalized Concierge service tailored to your needs.
+                <br><br>
+                <ul class="loan-list">
+                    <li><strong>Property Tax</strong>? We'll take care of the process!</li>
+                    <li><strong>Electricity & Water Bills</strong>? We'll facilitate everything!</li>
+                    <li><strong>Maintenance Fees</strong>? We'll make it a breeze!</li>
+                </ul>
+            </div>
+        </section>
+         <!-- Loan Assistance Section -->
+         <section class="section loan-assistance">
+            <div class="loan-details">
+                Just like the <strong>good old days</strong> - but <strong>better</strong>! we'll handle the <strong>details</strong> so you can focus on your <strong>new beginning</strong>.
+                <br><br>
+                We've got <strong>you</strong> covered, every step of the way... from <strong>loans</strong> to <strong>moving vans</strong>.
+            </div>
+            <ul class="loan-list">
+                <li><strong>Loan Assistance</strong> - The best loans, handpicked for you.</li>
+                <li><strong>Packers & Movers</strong> - Fast, easy moving with our trusted network.</li>
+                <li><strong>Charging Ahead</strong> - We'll also set up your EV Station!</li>
+            </ul>
+            <div class="loan-details">
+                But Wait, there's more!<br><br>
+                Our <strong>Concierge Service</strong>: Your home, Our care.<br>
+                Relax and let us handle the <strong>day-to-day</strong> property management, from <strong>tenant screening</strong> to <strong>maintenance</strong>, while providing personalized Concierge service tailored to your needs.
+                <br><br>
+                <ul class="loan-list">
+                    <li><strong>Property Tax</strong>? We'll take care of the process!</li>
+                    <li><strong>Electricity & Water Bills</strong>? We'll facilitate everything!</li>
+                    <li><strong>Maintenance Fees</strong>? We'll make it a breeze!</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- FAQs and Dream Home Section -->
+        <section class="section dream-home">
+            <div class="faq-buttons-container">
+                <div class="faq-button">1. ProPr: Your dream home, handpicked by All!</div>
+                <div class="faq-button">2. Worry-Free: Property Management: your Home, our headache.</div>
+                <div class="faq-button">3. Refer & Relax: Spread the buzz, cash in on the fun!</div>
+            </div>
+
+            <div class="highlight-section">
+                <p>No. of <strong>wyndo</strong> - shoppers who've discovered their <strong>dream home</strong>, here:</p>
+                <div class="highlight-text">003</div>
+                <p>Buying a home is like having a <strong>Conversation</strong> with an old <strong>friend</strong>.</p>
+                <p>Schedule a Free Consultation: Book a 15-minute call and get personalized guidance.</p>
+            </div>
+        </section>
+
+        <!-- Why Choose Wyndo Section -->
+        <section class="section why-choose-wyndo">
+            <h2>why choose <strong>wyndo</strong>? what sets <strong>us</strong> apart?</h2>
+            <ul>
+                <li><strong>A companion in Your Home Journey</strong>: Whether you buy your home through Wyndo or not, we’re here for every step of your journey—from designing your interiors to concierge services and helping you move in. Our commitment doesn’t waver, even if your final choice isn’t with us.</li>
+                <li><strong>Quality We Trust</strong>: We only offer properties and projects we’d choose for ourselves. If it’s not good enough for us, it’s not good enough for you.</li>
+                <li><strong>Your Property Hub</strong>: Skip the hassle of hunting property by property. With Wyndo, you get access to a full buffet of options, from free to premium. No pressure to make a rushed decision—take your time. Buying a home is a big step, not a race against the clock.</li>
+                <li><strong>Tailored Just For You</strong>: We know one size doesn’t fit all. At Wyndo, it’s all about personalizing your experience to match your lifestyle and preferences.</li>
+            </ul>
+        </section>
+
+        <!-- Ready to Join Us Section -->
+        <section class="section join-us">
+            <h2 class="join-us-title">Ready to join us on this journey?</h2>
+            <p>Discover how Wyndo can assist you in finding the perfect property or invest. Get in touch with us today!</p>
+            <div class="get-started">GET STARTED</div>
+            <p>Our Vision & Mission:</p>
+            <p>Our Vision: To be your one-stop destination for personalized real estate solutions and provide an unmatched homebuying experience.</p>
+        </section>
+           <!-- FAQs and Dream Home Section -->
+           <section class="section dream-home">
+           
+
+            <div class="highlight-section">
+                <p>No. of <strong>wyndo</strong> - shoppers who've discovered their <strong>dream home</strong>, here:</p>
+                <div class="highlight-text">003</div>
+                <p>Buying a home is like having a <strong>Conversation</strong> with an old <strong>friend</strong>.</p>
+                <p>Schedule a Free Consultation: Book a 15-minute call and get personalized guidance.</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
